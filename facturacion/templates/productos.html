@@ -1,0 +1,79 @@
+{% extends 'Base/base.html' %}
+
+
+{% block content %}
+<div class="d-grid gap-2 d-md-flex justify-content-md">
+    <h2>Lista de Productos</h2>
+</div>
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+  <form class="form" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="form_name" value="form1">
+      <button>
+          <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="search">
+              <path d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+      </button>
+      <input class="input" placeholder="Buscar" required="" type="text" name="buscar">
+      <button class="reset" type="reset">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+      </button>
+  </form>
+    <a href="{% url 'facturas' %}" class="btn btn-outline-success me-md-2 rounded-pill" type="button"><b>+</b> Añadir Factura</a>
+</div>  
+
+<table class="table">
+    <tr>
+        <th scope="col">Contacto</th>
+        <th scope="col" colspan="3">Producto</th>
+        <th scope="col">Total</th>
+        <th scope="col">Tipo de Pago</th>
+        <th scope="col">Fecha</th>
+        <th scope="col" colspan="5">Estado</th>
+  
+    </tr>
+    <tbody>
+{% for product in producto %}
+{% if product.entregado %}
+{% else %}
+<tr>
+<td>📱<a href="http://wa.me/53{{ product.factura.numero_wsp }}">{{ product.factura.numero_wsp }}</a></td>
+<td>{{ product.cantidad }}</td>
+<td>{{ product.nombre_producto }}</td>
+<td><a href="{{ product.enlace_temu }}">{{ product.enlace_temu }}</a></td>
+<td>${{ product.total }}</td>
+<td>{{ product.tipo_pago.tipo }}</td>
+<td>{{ product.fecha_formateada }}</td>
+
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="form_name" value="form2">
+        <input type="hidden" name="id" id="" value="{{product.pk}}" readonly>
+        {% if product.encargado %}
+        <td>Encargado: ✅</td>
+        {% else %}
+        <td>Encargado: {{estado.encargado}}</td>
+        {% endif %}
+        {% if product.recibido %}
+        <td>Recibido: ✅</td>
+        {% else %}
+        <td>Recibido: {{estado.recibido}}</td>
+        {% endif %}
+        {% if product.entregado %}
+        <td>Entregado: ✅</td>
+        {% else %}
+        <td>Entregado: {{estado.entregado}}</td>
+        {% endif %}
+        <td><input class="btn btn-success btn-sm" type="submit" value="Actualizar"></td>
+    </form>
+<td>
+    <a class="btn btn-success btn-sm" href="{% url 'modificar' product.pk %}">Modificar</a>
+</td>
+</tr>
+{% endif %}
+{% endfor %}
+</tbody>
+{% endblock %}

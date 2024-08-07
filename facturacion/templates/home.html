@@ -1,0 +1,14 @@
+{% extends 'Base/base.html' %}
+
+{% block content %}
+    <h1>Bienvenido a la apliacion de facturas</h1>
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maxime nihil, odit alias corrupti repellendus voluptatibus quae soluta accusamus animi! Veniam quae asperiores omnis eligendi similique necessitatibus cupiditate et? Atque, accusantium!
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio accusantium facere nemo saepe quibusdam, odio voluptatibus aperiam facilis dolores aliquid illo eum itaque minima illum dolore laboriosam ratione explicabo. Quaerat.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima aperiam similique suscipit magni dolorem alias laborum illum maiores, aliquid, totam sed sint labore doloribus odio praesentium libero voluptates blanditiis fugiat?
+    </p>
+    <div class="d-grid gap-2 col-4 mx-auto">
+        <h2>¿Qué desea hacer?</h2>
+        <a class="btn btn-success" href="{% url 'productos' %}">Revisar Productos</a>
+        <a class="btn btn-success" href="{% url 'facturas' %}">Crear Factura</a>
+    </div>
+{% endblock %}

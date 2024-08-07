@@ -1,0 +1,95 @@
+{% extends 'Base/base.html' %}
+{% load static %}
+{% block content %}
+
+<h1>Crear Factura</h1>
+<a href="{% url 'productos' %}" class="btn btn-warning">Salir</a>
+<button id="guardar_factura" class="btn btn-success">Guardar Factura</button>
+<div id="telefono_container" style="display:none;">
+    <input type="text" id="numero_wsp" placeholder="Número de WhatsApp" required>
+</div>
+    <div>
+<h2>Agregar Producto</h2>
+<table class="table">
+    <tr>
+        <th>Producto</th>
+        <th>Enlace</th>
+        <th>Cantidad</th>
+        <th>Precio</th>
+        <th colspan="2">Tipo de Pago</th>
+    </tr>
+    <tr>
+        <form id="producto-form">
+            {% csrf_token %}
+            <td>{{factura.nombre_producto}}</td>
+            <td>{{factura.enlace_temu}}</td>
+            <td>{{factura.cantidad}}</td>
+            <td>{{factura.precio}}</td>
+            <td>{{factura.tipo_pago}}</td>
+            <td>
+                <Button class="btn btn-outline-success me-md-2 rounded-pill" type="submit">
+                + Añadir Producto
+                </Button>
+            </td>
+        </form>
+    </tr>
+    </table>
+
+</div>
+
+<h2>Factura</h2>
+<div id="factura"></div>
+
+<!-- Modal para opciones después de guardar la factura -->
+<div id="successModal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <p>Factura guardada con éxito.</p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md">
+        <a href="{% url 'facturas' %}" class="btn btn-outline-success btn-sm me-md-2 rounded-pill" id="newInvoiceBtn">Crear nueva factura</a>
+        <a href="{% url 'productos' %}" class="btn btn-outline-success btn-sm me-md-2 rounded-pill" id="viewProductsBtn">Regresar a productos</a>
+    </div>
+    </div>
+</div>
+<style>
+    /* Estilos básicos para el modal */
+    .modal {
+        display: none; 
+        position: fixed; 
+        z-index: 1; 
+        left: 0;
+        top: 0;
+        width: 100%; 
+        height: 100%; 
+        overflow: auto; 
+        background-color: rgb(0,0,0); 
+        background-color: rgba(0,0,0,0.4); 
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; 
+        padding: 20px;
+        border: 1px solid #888;
+        width: 40%; 
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+</style>
+
+
+<script src="{% static 'script.js' %}"></script>
+
+{% endblock %}

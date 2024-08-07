@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicacion de Facturas</title>
+    <link rel="stylesheet" href="{% static 'node_modules/bootstrap/dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'serch.css' %}">
+    <link scr="{% static 'node_modules/bootstrap/dist/js/bootstrap.min.js' %}">
+</head>
+<body>
+        <div class="container-fluid">
+                <ul class="nav nav-tabs justify-content-end">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Inicio</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'productos' %}">Productos</a>
+                  </li>
+                </ul>>        
+        </div>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

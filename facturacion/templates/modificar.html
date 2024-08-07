@@ -1,0 +1,70 @@
+{% extends 'Base/base.html' %}
+
+{% block content %}
+<div class="d-grid gap-3 col-8 mx-auto">
+<form action="" method="post">
+    <div>
+        <a class="btn btn-close btn-lg" data-bs-toggle="button" href="{% url 'productos' %}"></a>
+        <input class="btn btn-outline-danger mt-2 float-end" type="submit" value="Actualizar">
+    </div>
+    {% csrf_token %}
+    <br>
+    <br>
+    
+    <table class="table">
+        <tr><td>
+            <b>📱Numero de contacto:</b>
+        </td><td>
+            <b>Metodo de Pago:</b>
+        </td><td colspan="2">
+            <b>Producto:</b>
+        </td></tr>
+        <tr><td>
+            {{modificar.factura}}
+        </td><td>
+            {{modificar.tipo_pago}}
+        </td><td>
+            {{modificar.nombre_producto}}
+        </td><td>
+            {{modificar.enlace_temu}}
+        </td></tr>
+        <tr><td>
+            <b>Cantidad: </b>
+        </td><td>
+            <b>Precio:</b>
+        </td><td colspan="2">
+            <b>Total:</b>
+        </td></tr>
+        <tr><td>
+            {{modificar.cantidad}}
+        </td><td>
+            {{modificar.precio}}
+        </td><td colspan="2">
+            {{producto.total}}
+        </td></tr>
+        <tr><td>
+            <b>Estado:</b>
+        </td><td>
+            {{modificar.encargado}} <b>Encargado</b> 
+        </td><td>
+            {{modificar.recibido}} <b>Recibido</b> 
+        </td><td>
+            {{modificar.entregado}} <b>Entregado</b>
+        </td></tr>
+    </table>
+    <input type="hidden" name="id" id="" value="{{product.pk}}" readonly>
+</form>
+<hr>
+{% if anterior == 0 %}
+<div>
+    <a class="btn btn-success mt-2 float-end" href="{% url 'modificar' siguiente %}">Siguiente <span aria-hidden="true">&raquo;</span></a>
+</div>
+{% else %}
+<div>
+    <a class="btn btn-success mt-2" href="{% url 'modificar' anterior %}"><span aria-hidden="true">&laquo;</span> Anterior</a>
+    <a class="btn btn-success mt-2 float-end" href="{% url 'modificar' siguiente %}">Siguiente <span aria-hidden="true">&raquo;</span></a>
+</div>
+{% endif %}
+</div>
+
+{% endblock %}

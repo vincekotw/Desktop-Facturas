@@ -1,0 +1,33 @@
+{
+  "name": "facturas",
+  "version": "1.0.0",
+  "description": "aplicacion de facturas version escritorio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "Factura": "electron .",
+    "build": "electron-builder"
+  },
+  "author": "Vince KOTW King",
+  "license": "MIT",
+  "dependencies": {
+    "build": "^0.1.4"
+  },
+  "devDependencies": {
+    
+    "electron": "^31.3.1",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.vince.facturas",
+    "productName": "Facturas",
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}
